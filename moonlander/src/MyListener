@@ -17,14 +17,17 @@ public class MyListener implements KeyListener{
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		if(arg0.getKeyCode() == KeyEvent.VK_W){
-			this.s.dir += 10;
+			this.s.setBoost(3);
+			this.s.setFuel(this.s.getFuel()-1);
 		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		
+		if(arg0.getKeyCode() == KeyEvent.VK_W){
+			this.s.setBoost(0);
+		}
 	}
 
 	@Override
