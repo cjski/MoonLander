@@ -6,6 +6,8 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /*
  * Moon Lander Game Main run
@@ -13,15 +15,14 @@ import javax.swing.JFrame;
  * 
  * By Chris Janowski and Hannah Luo
  */
-public class Main extends JComponent implements KeyListener{
+public class Main extends JComponent{
 	
 	//Jframe variable
 	private static final long serialVersionUID = -688856155579961348L;
 	
 	private JFrame frame;
-	
+	private MyListener myL;
 	private long time;
-	
 	/*
 	 * Constructor for the game object
 	 * initializes JFrame
@@ -31,24 +32,29 @@ public class Main extends JComponent implements KeyListener{
 	
 	public Main(){
 		
+		this.s = new Ship(100,100);
+		
 		//Creates a new Frame to draw graphics to
-		this.frame = new JFrame(); 
+		this.frame = new JFrame();
 		//Sets the default shutdown and close operation
 	    this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    //Sets the size of the frame
-	    this.frame.setSize(1080,760); 
+	    this.frame.setSize(1080,700); 
 	    //Adds the game object onto the frame to draw to it
 	    this.frame.add(this);
 	    //Makes the frame visible to the user
 	    this.frame.setVisible(true);
-	    this.addKeyListener(this);
+	    this.myL = new MyListener(this.s);
+	    this.frame.addKeyListener(this.myL);
+	    this.setFocusable(true);
 	    //Not using mouse clicks yet, uncomment when needed
 	    /*
 	    //Tells the frame to respond to mouse actions
 	    this.addMouseListener(this);
 	    */
-	    this.s = new Ship(100, 100);
 	    this.time = System.currentTimeMillis();
+	    
+	    
 	    while(true){
 	    	//Updates game - positions of ship and map
 	    	this.update();
@@ -70,26 +76,8 @@ public class Main extends JComponent implements KeyListener{
 	public void update(){
 		if(System.currentTimeMillis() - this.time > 100){
 			this.time = System.currentTimeMillis();
-			this.s.angle += 10;
+			//this.s.dir += 10;
 		}
-	}
-
-	@Override
-	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		s.changeAngle(arg0);
-	}
-
-	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	public void paint(Graphics g){
