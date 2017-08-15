@@ -17,44 +17,48 @@ import javax.swing.JPanel;
  */
 public class Main extends JComponent{
 	
-	//Jframe variable
+	//Jframe variables
 	private static final long serialVersionUID = -688856155579961348L;
-	
 	private JFrame frame;
+	//Objects that takes care of key listening
 	private MyListener myL;
-	private long time;
-	/*
-	 * Constructor for the game object
-	 * initializes JFrame
-	 */
 	
+	//Game variables
+	private long time;
 	private Ship s;
 	
+	/*
+	 * Constructor for the game object
+	 * initializes JFrame and sets the listener to listen to the keys
+	 */
 	public Main(){
 		
+		//Creates a new ship
 		this.s = new Ship(100,100);
 		
 		//Creates a new Frame to draw graphics to
 		this.frame = new JFrame();
 		//Sets the default shutdown and close operation
-	    this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    //Sets the size of the frame
-	    this.frame.setSize(1080,700); 
-	    //Adds the game object onto the frame to draw to it
-	    this.frame.add(this);
-	    //Makes the frame visible to the user
-	    this.frame.setVisible(true);
-	    this.myL = new MyListener(this.s);
-	    this.frame.addKeyListener(this.myL);
-	    this.setFocusable(true);
-	    //Not using mouse clicks yet, uncomment when needed
-	    /*
-	    //Tells the frame to respond to mouse actions
-	    this.addMouseListener(this);
-	    */
-	    this.time = System.currentTimeMillis();
+	   	this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	  	//Sets the size of the frame
+	   	this.frame.setSize(1080,700); 
+	   	//Adds the game object onto the frame to draw to it
+	    	this.frame.add(this);
+	   	//Makes the frame visible to the user
+	    	this.frame.setVisible(true);
+		
+		//Creates a new listener to listen to the key presses
+		//Uses ship class in order to update the ship parameters
+	   	this.myL = new MyListener(this.s);
+		
+		//The frame adds the keylistener to be able to update its graphics
+	   	this.frame.addKeyListener(this.myL);
+	    	this.setFocusable(true);
+	    	
+		//Initalizes the time
+	    	this.time = System.currentTimeMillis();
 	    
-	    
+	    //Starts the game loop - infinite loop, will end when the game is closed
 	    while(true){
 	    	//Updates game - positions of ship and map
 	    	this.update();
@@ -74,13 +78,23 @@ public class Main extends JComponent{
 	 * Updates all game variables and entities
 	 */
 	public void update(){
+		//Waits until 100 milliseconds has passed before running
 		if(System.currentTimeMillis() - this.time > 100){
+			//Resets the time to check against
 			this.time = System.currentTimeMillis();
-			//this.s.dir += 10;
+			
+			//Updates the ship position and speed
+			this.s.updatepos();
+			this.s.updatespeed();
 		}
 	}
 	
+	/*
+	 * Draws the graphics on the screen
+	 */
 	public void paint(Graphics g){
+		
+		//Draws the ship onto the screen
 		this.s.draw(g);
 	}
 }
