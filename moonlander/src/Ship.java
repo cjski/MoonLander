@@ -20,7 +20,10 @@ public class Ship {
 	public Ship(int x0, int y0){
 		this.x = x0;
 		this.y = y0;
-		this.angle = 45;
+		this.angle = 90;
+		this.boost = 0;
+		this.xspeed = 5;
+		this.yspeed = -5;
 	}
 	
 	public static void main(String args[]) {
@@ -40,6 +43,13 @@ public class Ship {
 	public int getFuel() {
 		return this.fuel;
 	}
+	public void setFuel(int newFuel){
+		this.fuel = newFuel;
+	}
+	
+	public void setBoost(int boost){
+		this.boost = boost;
+	}
 	
 	public static int getNum(Scanner sc) {
 		System.out.println("Enter a number:");
@@ -54,26 +64,16 @@ public class Ship {
 		if(arg0.getKeyCode() == KeyEvent.VK_RIGHT)
 			this.angle += 10;
 		} 
-
-	public void booster(KeyEvent arg0) {
-		while(arg0.getKeyCode() == KeyEvent.VK_UP) {
-			this.boost++;
-			this.fuel--;
-			}
-		}
 	
-	private void updatespeed() {
+	public void updatespeed() {
 			while(Math.abs(this.angle) >=360 ) {
-				if(this.angle < 0)
-					this.angle += 360;
-				else
-					this.angle -= 360;
+				this.angle -= 360;
 			}
-			this.xspeed += this.boost*Math.cos(this.angle);
-			this.yspeed += this.boost*Math.sin(this.angle) - 2;
+			//this.xspeed += this.boost*Math.cos(this.angle);
+			this.yspeed -= this.boost*Math.sin(this.angle) - 1;
 		}
 
-	private void updatepos() {
+	public void updatepos() {
 			this.x += this.xspeed;
 			this.y += this.yspeed;
 		}
