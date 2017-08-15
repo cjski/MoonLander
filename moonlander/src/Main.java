@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 /*
  * Moon Lander Game Main run
  * start game here and control screen and all objects here
- * 
+ * hi chris it me
  * By Chris Janowski and Hannah Luo
  */
 public class Main extends JComponent{
