@@ -76,6 +76,8 @@ public class Main extends JComponent{
 	public void update(){
 		if(System.currentTimeMillis() - this.time > 100){
 			this.time = System.currentTimeMillis();
+			this.s.updatepos();
+			this.s.updatespeed();
 			//this.s.dir += 10;
 		}
 	}
