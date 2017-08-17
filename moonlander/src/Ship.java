@@ -28,7 +28,7 @@ public class Ship {
 		this.y = y0;
 		this.angle = 90;
 		this.boost = 0;
-		this.xspeed = 5;
+		this.xspeed = 3;
 		this.yspeed = -5;
 	}
 	
