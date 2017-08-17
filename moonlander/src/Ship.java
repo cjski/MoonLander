@@ -35,6 +35,20 @@ public class Ship {
 	/*
 	 * Returns yspeed of the ship
 	 */
+	public int getXPos() {
+		return this.x;
+	}
+	
+	/*
+	 * Returns yspeed of the ship
+	 */
+	public int getYPos() {
+		return this.y;
+	}
+	
+	/*
+	 * Returns yspeed of the ship
+	 */
 	public int getYSpeed() {
 		return this.yspeed;
 	}

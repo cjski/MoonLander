@@ -12,7 +12,6 @@ import javax.swing.JPanel;
 /*
  * Moon Lander Game Main run
  * start game here and control screen and all objects here
- * hi chris it me
  * By Chris Janowski and Hannah Luo
  */
 public class Main extends JComponent{
@@ -26,6 +25,8 @@ public class Main extends JComponent{
 	//Game variables
 	private long time;
 	private Ship s;
+	private int FrameHeight;
+	private int FrameWidth;
 	
 	/*
 	 * Constructor for the game object
@@ -36,12 +37,16 @@ public class Main extends JComponent{
 		//Creates a new ship
 		this.s = new Ship(100,100);
 		
+		//Set frame dimensions
+		this.FrameWidth = 1080;
+		this.FrameHeight = 700;
+		
 		//Creates a new Frame to draw graphics to
 		this.frame = new JFrame();
 		//Sets the default shutdown and close operation
 	   	this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	  	//Sets the size of the frame
-	   	this.frame.setSize(1080,700); 
+	   	this.frame.setSize(FrameWidth, FrameHeight); 
 	   	//Adds the game object onto the frame to draw to it
 	    	this.frame.add(this);
 	   	//Makes the frame visible to the user
@@ -78,6 +83,12 @@ public class Main extends JComponent{
 	 * Updates all game variables and entities
 	 */
 	public void update(){
+		//Checks if ship goes out of bounds
+		if(this.s.getXPos() <= 0 || this.s.getYPos() <= 0 || this.s.getXPos() >= this.FrameWidth 
+		|| this.s.getYPos() >= this.FrameHeight) {
+			System.exit(0);
+		}
+		
 		//Waits until 100 milliseconds has passed before running
 		if(System.currentTimeMillis() - this.time > 100){
 			//Resets the time to check against
