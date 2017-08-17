@@ -32,16 +32,6 @@ public class Ship {
 		this.yspeed = -5;
 	}
 	
-	public static void main(String args[]) {
-		Scanner sc = new Scanner(System.in); //console input/output
-		
-		int x = getNum(sc);
-		
-		System.out.println(x);
-		
-		sc.close();
-	}
-	
 	/*
 	 * Returns yspeed of the ship
 	 */
@@ -69,13 +59,6 @@ public class Ship {
 	 */
 	public void setBoost(int boost){
 		this.boost = boost;
-	}
-	
-	public static int getNum(Scanner sc) {
-		System.out.println("Enter a number:");
-		int x = sc.nextInt(); // input next int as console input
-		
-		return x;
 	}
 	
 	/*
